@@ -1,0 +1,63 @@
+.contador-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+  margin-top: 15px;
+}
+
+.contador-controles {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgba(15, 23, 42, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  width: 100%;
+  padding: 5px;
+}
+
+.contador-btn {
+  background: transparent;
+  color: #f8fafc;
+  border: none;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 5px 15px;
+  transition: color 0.2s;
+}
+
+.contador-btn:hover {
+  color: #3498db;
+}
+
+.contador-numero {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #f8fafc;
+}
+
+.contador-btn-agregar {
+  background-color: #3498db;
+  color: #ffffff;
+  border: none;
+  padding: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.contador-btn-agregar:hover {
+  background-color: #2980b9;
+}
+
+.contador-btn-agregar:active {
+  transform: scale(0.98);
+}

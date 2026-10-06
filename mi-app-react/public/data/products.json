@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "title": "Zapatillas Puma rojas",
+    "description": "Zapatillas urbanas Puma rojas con detalles blancos.",
+    "price": 84990,
+    "category": "urbana",
+    "image": "/img/footwear/zapatillas1.png"
+  },
+  {
+    "id": 2,
+    "title": "Zapatillas Salomon grises",
+    "description": "Zapatillas deportivas Salomon grises y negras, ideales para actividades al aire libre.",
+    "price": 79990,
+    "category": "outdoor",
+    "image": "/img/footwear/zapatillas2.png"
+  },
+  {
+    "id": 3,
+    "title": "Zapatillas Nike naranjas",
+    "description": "Zapatillas Nike deportivas naranjas con detalles negros.",
+    "price": 89990,
+    "category": "running",
+    "image": "/img/footwear/zapatillas3.png"
+  },
+  {
+    "id": 4,
+    "title": "Zapatillas deportivas Sparta",
+    "description": "Diseño deportivo Sparta en color negro integral.",
+    "price": 94990,
+    "category": "urbana",
+    "image": "/img/footwear/zapatillas4.png"
+  },
+  {
+    "id": 5,
+    "title": "Zapatillas Air Jordan blancas y naranjas",
+    "description": "Zapatillas altas Air Jordan blancas, negras y naranjas.",
+    "price": 99990,
+    "category": "urbana",
+    "image": "/img/footwear/zapatillas5.png"
+  },
+  {
+    "id": 6,
+    "title": "Zapatillas Vans blancas",
+    "description": "Zapatillas urbanas Vans blancas con suela color caramelo.",
+    "price": 89990,
+    "category": "urbana",
+    "image": "/img/footwear/zapatillas6.png"
+  }
+]

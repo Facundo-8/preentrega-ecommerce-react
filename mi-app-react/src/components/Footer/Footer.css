@@ -1,0 +1,36 @@
+footer {
+  width: 100%;
+  padding: 30px 50px;
+  margin-top: auto;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+footer nav {
+  width: auto;
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+footer .nav-list {
+  display: flex;
+  gap: 40px;
+  list-style: none;
+}
+
+footer .nav-list li {
+  color: #f8fafc;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  transition: color 0.3s ease;
+  opacity: 0.8;
+}
+
+footer .nav-list li:hover {
+  color: #3498db;
+  opacity: 1;
+}
