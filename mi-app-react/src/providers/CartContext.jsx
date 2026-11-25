@@ -1,35 +1,78 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useContext } from "react";
 
 export const CartContext = createContext();
 
+export const useCart = () => useContext(CartContext);
+
 export const CartProvider = ({ children }) => {
-    const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState([]);
+  const [toast, setToast] = useState(null);
 
-    const addToCart = (item, quantity) => {
-        const itemInCart = cart.find((prod) => prod.id === item.id);
+  const showToast = (message, type = "info") => {
+    setToast({ message, type });
+    setTimeout(() => {
+      setToast(null);
+    }, 3200);
+  };
 
-        if (itemInCart) {
-            setCart(
-                cart.map((prod) =>
-                    prod.id === item.id
-                        ? { ...prod, quantity: prod.quantity + quantity }
-                        : prod
-                )
-            );
-        } else {
-            setCart([...cart, { ...item, quantity }]);
-        }
-    };
+  const addToCart = (item, quantity) => {
+    const existingIndex = cart.findIndex((prod) => prod.id === item.id);
 
-    const clearCart = () => setCart([]);
+    if (existingIndex !== -1) {
+      const updatedCart = [...cart];
+      updatedCart[existingIndex].quantity += quantity;
+      setCart(updatedCart);
+    } else {
+      setCart([...cart, { ...item, quantity }]);
+    }
 
-    const getCartQuantity = () => {
-        return cart.reduce((acc, prod) => acc + prod.quantity, 0);
-    };
+    showToast(`Agregaste ${quantity}x ${item.title} al carrito`, "info");
+  };
 
-    return (
-        <CartContext.Provider value={{ cart, addToCart, clearCart, getCartQuantity }}>
-            {children}
-        </CartContext.Provider>
-    );
+  const removeItem = (id) => {
+    setCart(cart.filter((prod) => prod.id !== id));
+    showToast("Producto eliminado del carrito", "warning");
+  };
+
+  const clearCart = () => {
+    setCart([]);
+  };
+
+  const getCartQuantity = () => {
+    return cart.reduce((acc, prod) => acc + prod.quantity, 0);
+  };
+
+  const getCartTotal = () => {
+    return cart.reduce((acc, prod) => acc + prod.price * prod.quantity, 0);
+  };
+
+  const checkout = () => {
+    clearCart();
+    showToast("¡Compra realizada con éxito! Gracias por elegirnos.", "success");
+  };
+
+  return (
+    <CartContext.Provider
+      value={{
+        cart,
+        addToCart,
+        removeItem,
+        clearCart,
+        getCartQuantity,
+        getCartTotal,
+        checkout,
+      }}
+    >
+      {children}
+
+      {toast && (
+        <div className={`custom-toast toast-${toast.type}`}>
+          <span className="toast-icon">
+            {toast.type === "success" ? "✓" : toast.type === "warning" ? "✕" : "🛒"}
+          </span>
+          <p>{toast.message}</p>
+        </div>
+      )}
+    </CartContext.Provider>
+  );
 };

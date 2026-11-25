@@ -1,38 +1,36 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { ItemDetail } from "../ItemDetail/ItemDetail";
+import { getProductById } from "../../services/productsService";
+
 
 export const ItemDetailContainer = () => {
-    const { id } = useParams();
-    const [product, setProduct] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const { id } = useParams();
 
-    useEffect(() => {
-        fetch("/data/products.json")
-            .then((res) => {
-                if (!res.ok) {
-                    throw new Error("Error al cargar el producto");
-                }
-                return res.json();
-            })
-            .then((data) => {
-                const encontrado = data.find((prod) => prod.id === parseInt(id));
-                if (!encontrado) {
-                    throw new Error("Producto no encontrado");
-                }
-                setProduct(encontrado);
-            })
-            .catch((err) => setError(err.message))
-            .finally(() => setLoading(false));
-    }, [id]);
+  useEffect(() => {
+    setLoading(true);
+    setError(null);
+    getProductById(id)
+      .then((data) => {
+        setProduct(data);
+      })
+      .catch((err) => {
+        console.error(err);
+        setError("No se pudo encontrar la zapatilla solicitada.");
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, [id]);
 
-    if (loading) return <p>Cargando detalle...</p>;
-    if (error) return <p>{error}</p>;
-
-    return (
-        <section>
-            <ItemDetail item={product} />
-        </section>
-    );
+  return (
+    <section className="item-detail-container">
+      {loading && <p className="loading-message">Cargando detalle...</p>}
+      {error && <p className="error-message">{error}</p>}
+      {!loading && !error && product && <ItemDetail item={product} />}
+    </section>
+  );
 };

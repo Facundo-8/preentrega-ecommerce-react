@@ -10,7 +10,6 @@ export const ItemDetail = ({ item }) => {
 
     const handleOnAdd = (quantity) => {
         addToCart(item, quantity);
-        alert(`¡Agregaste ${quantity} un. de "${item.title}" al carrito!`);
     };
 
     return (
